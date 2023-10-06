@@ -11,7 +11,7 @@ import { Article } from "@/types/Article";
 import { log } from "console";
 import { arrayBuffer } from "node:stream/consumers";
 import { Graph } from "@/types/Nodes";
-import names from "../../../utils/names_mapping.json";
+import { names } from "../../../utils/names_mapping.js";
 
 import { propagandaMap } from "../../../../config";
 import PieChart from "components/Charts/PieChart";
