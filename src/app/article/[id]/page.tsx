@@ -175,46 +175,93 @@ const Page = ({ params }: any) => {
         fetch(`/api/article/rec?id=${articleId}`)
             .then((res) => res.json())
             .then((data) => {
-                setRelatedArticles(data.slice(0, 3));
+                setRelatedArticles((data) => data?.slice(0, 3));
             });
     };
+
+    // useEffect(() => {
+    //     if (!article) return;
+    //     fetchProp(article.content);
+    //     fetchFake(article.content);
+    //     // @ts-ignore
+    //     let keys = article["keys"];
+    //     // @ts-ignore
+    //     let prob = article["prob"];
+    //     keys = keys?.slice(1, keys.length - 1).split(", ");
+    //     const k = [];
+    //     for (let key of keys) {
+    //         k.push(key?.slice(1, key?.length - 1));
+    //     }
+    //     prob = prob.slice(1, prob.length - 1).split(", ");
+    //     const p = [];
+    //     for (let key of prob) {
+    //         p.push(parseFloat(key) * 100);
+    //     }
+    //     console.log("article", k, " ", prob);
+    //     setTweetData({
+    //         // @ts-ignore
+    //         labels: k,
+    //         datasets: [
+    //             {
+    //                 label: "Tweet Analysis",
+    //                 // @ts-ignore
+    //                 data: p,
+    //                 backgroundColor: [
+    //                     "rgb(129, 236, 236, 0.2)",
+    //                     "rgb(162, 155, 254, 0.2)",
+    //                 ],
+    //                 borderColor: ["#00cec9", "#6c5ce7"],
+    //                 borderWidth: 1,
+    //             },
+    //         ],
+    //     });
+
+    //     // fetchImageBlob();
+    // }, [article]);
 
     useEffect(() => {
         if (!article) return;
         fetchProp(article.content);
         fetchFake(article.content);
-        // @ts-ignore
-        let keys = article["keys"];
-        // @ts-ignore
-        let prob = article["prob"];
-        keys = keys?.slice(1, keys.length - 1).split(", ");
-        const k = [];
-        for (let key of keys) {
-            k.push(key.slice(1, key.length - 1));
-        }
-        prob = prob.slice(1, prob.length - 1).split(", ");
-        const p = [];
-        for (let key of prob) {
-            p.push(parseFloat(key) * 100);
-        }
-        console.log("article", k, " ", prob);
-        setTweetData({
-            // @ts-ignore
-            labels: k,
-            datasets: [
-                {
-                    label: "Tweet Analysis",
-                    // @ts-ignore
-                    data: p,
-                    backgroundColor: [
-                        "rgb(129, 236, 236, 0.2)",
-                        "rgb(162, 155, 254, 0.2)",
+
+        // Check if article has "keys" and "prob" properties
+        if (article.hasOwnProperty("keys") && article.hasOwnProperty("prob")) {
+            let keys = article["keys"];
+            let prob = article["prob"];
+
+            // Check if keys and prob are strings
+            if (typeof keys === "string" && typeof prob === "string") {
+                keys = keys?.slice(1, keys.length - 1).split(", ");
+                const k = [];
+                for (let key of keys) {
+                    k.push(key?.slice(1, key?.length - 1));
+                }
+
+                prob = prob.slice(1, prob.length - 1).split(", ");
+                const p = [];
+                for (let key of prob) {
+                    p.push(parseFloat(key) * 100);
+                }
+
+                console.log("article", k, " ", prob);
+
+                setTweetData({
+                    labels: k,
+                    datasets: [
+                        {
+                            label: "Tweet Analysis",
+                            data: p,
+                            backgroundColor: [
+                                "rgb(129, 236, 236, 0.2)",
+                                "rgb(162, 155, 254, 0.2)",
+                            ],
+                            borderColor: ["#00cec9", "#6c5ce7"],
+                            borderWidth: 1,
+                        },
                     ],
-                    borderColor: ["#00cec9", "#6c5ce7"],
-                    borderWidth: 1,
-                },
-            ],
-        });
+                });
+            }
+        }
 
         // fetchImageBlob();
     }, [article]);
@@ -293,7 +340,7 @@ const Page = ({ params }: any) => {
                 </div>
             )}
 
-            {propagandas.length > 0 ? (
+            {propagandas?.length > 0 ? (
                 <div className="m-8">
                     <section className="text-gray-600 body-font overflow-hidden">
                         <p className="text-xl font-bold tracking-wide dark:text-white my-4 w-full text-center">
