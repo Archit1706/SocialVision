@@ -56,10 +56,12 @@ Original PS: https://docs.google.com/document/d/1FSVBhtfw9p8ChREA0ANN4gSav6GntZv
   <img src="./screenshots/featured_articles.jpeg"/>
 
 - Word Cloud and Recommended Articles
+![article home](https://github.com/Archit1706/SocialVision/assets/75872913/bd2acc03-b8e2-4788-a855-0c54fff2bb3b)
   <img src="./screenshots/wordcloud.jpeg"/>
 
 - Coordinated Networks
   <img src="./screenshots/Graph_of_coordinated_behaviour.jpeg"/>
+  ![network visual](https://github.com/Archit1706/SocialVision/assets/75872913/7d4c68c5-a4e7-4b2f-90ff-aa9117928e97)
 
 - Propaganda Detection
   <img src="./screenshots/propaganda_detection.jpeg"/>
